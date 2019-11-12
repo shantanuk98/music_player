@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'dart:async';
-import 'package:flutter/services.dart';
-import 'package:media_notification/media_notification.dart';
 
 class SongPage extends StatefulWidget {
 
@@ -20,6 +18,8 @@ class _SongPageState extends State<SongPage> with AutomaticKeepAliveClientMixin 
   bool get wantKeepAlive => true;
 
   static WebViewController _myController;// = new WebViewController();
+
+
   String name,url,urllink;
   Widget pauseOrPlay = Icon(Icons.play_arrow);
   _SongPageState(this.name,this.url,this.urllink);
@@ -137,70 +137,7 @@ class _SongPageState extends State<SongPage> with AutomaticKeepAliveClientMixin 
     );
   }
 
-  String status = 'hidden';
-
-  Future<void> hide() async {
-    try {
-      await MediaNotification.hide();
-      setState(() => status = 'hidden');
-  } on PlatformException {
-
-    }
-  }
-
-  Future<void> show(title, author) async {
-    try {
-      await MediaNotification.show(title: title, author: author);
-      setState(() => status = 'play');
-    } on PlatformException {
-
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    MediaNotification.setListener('pause', () {
-      setState(() => status = 'pause');
-      Future<String> pop = _myController.evaluateJavascript("document.getElementsByName('media')[0].paused;");
-                            pop.then((onValue){
-                              if(onValue=="false"){
-                                _myController.evaluateJavascript("document.getElementsByName('media')[0].pause();");
-                                setState(() {
-                                  pauseOrPlay = Icon(Icons.play_arrow);
-                                });
-                              }
-                            });
-    });
-
-    MediaNotification.setListener('play', () {
-      setState(() => status = 'play');
-      Future<String> pop = _myController.evaluateJavascript("document.getElementsByName('media')[0].paused;");
-                            pop.then((onValue){
-                              if(onValue=="true"){
-                                _myController.evaluateJavascript("document.getElementsByName('media')[0].play();");
-                                setState(() {
-                                  pauseOrPlay = Icon(Icons.pause);
-                                });
-                              }
-                            });
-    });
-    
-    MediaNotification.setListener('next', () {
-      
-    });
-
-    MediaNotification.setListener('prev', () {
-      
-    });
-
-    MediaNotification.setListener('select', () {
-      
-    });
-
-    show(name, name);
-  }
+  
 
 
   @override 
