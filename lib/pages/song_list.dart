@@ -57,6 +57,7 @@ class _SongListState extends State<SongList> {
       backgroundColor: Color.fromRGBO(150, 66, 86, 1.0),
       appBar: AppBar(
         title: Text("Songs"),
+        
         actions: <Widget>[
             GestureDetector(
               onTap: (){
@@ -98,7 +99,7 @@ class _SongListState extends State<SongList> {
   Widget songcard(String song , String artists ,String url,String urllink ){
     return GestureDetector(
       onTap: (){
-        Navigator.push(context,MaterialPageRoute(builder: (context) => SongPage(song,url,urllink)),);
+        Navigator.push(context,MaterialPageRoute(builder: (context) => SongPage(song,artists,password,url,urllink)),);
       },
       child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 8),

@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:music_player/pages/song_list.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:media_notification/media_notification.dart';
+import 'payment_page.dart';
 
 class SongPage extends StatefulWidget {
 
-  final String name,url,urllink;
-  SongPage(this.name,this.url,this.urllink);
+  final String name,artists,password,url,urllink;
+  SongPage(this.name,this.artists,this.password,this.url,this.urllink);
 
   @override
-  _SongPageState createState() => _SongPageState(name,url,urllink);
+  _SongPageState createState() => _SongPageState(name,artists,password,url,urllink);
 }
 
 class _SongPageState extends State<SongPage> with AutomaticKeepAliveClientMixin {
@@ -20,14 +22,14 @@ class _SongPageState extends State<SongPage> with AutomaticKeepAliveClientMixin 
   bool get wantKeepAlive => true;
 
   static WebViewController _myController;// = new WebViewController();
-  String name,url,urllink;
+  String name,artists,password,url,urllink;
   Widget pauseOrPlay = Icon(Icons.play_arrow);
-  _SongPageState(this.name,this.url,this.urllink);
+  _SongPageState(this.name,this.artists,this.password,this.url,this.urllink);
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: (){
-        Navigator.pop(context);
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> SongList(name, password)));
         //dispose();
       },
           child: Scaffold(
@@ -94,27 +96,46 @@ class _SongPageState extends State<SongPage> with AutomaticKeepAliveClientMixin 
                       ),
                     ),
                   ),
-                  Column(
-                    children: <Widget>[
-                      Container(
-                        child:Slider(
-                          value: 0.5,
-                          onChanged: (double){
+                  Container(
+                    height: MediaQuery.of(context).size.height*0.14,
+                    width: MediaQuery.of(context).size.width*0.54,  
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          child:Slider(
+                            value: 0.5,
+                            onChanged: (double){
 
-                          },
+                            },
 
+                          ),
                         ),
+                        Container(
+                          child:Slider(
+                            value: 0.1,
+                            onChanged: (double){
+
+                            },
+
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: MediaQuery.of(context).size.height*0.1,
+                      width: MediaQuery.of(context).size.width*0.2,
+                    child: RaisedButton(
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Icon(Icons.attach_money),
                       ),
-                      Container(
-                        child:Slider(
-                          value: 0.1,
-                          onChanged: (double){
-
-                          },
-
-                        ),
-                      )
-                    ],
+                      onPressed: (){
+                        _myController.evaluateJavascript("document.getElementsByName('media')[0].pause()");
+                        //dispose();
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> PaymentPage(name,artists,url)));
+                      },
+                    ),
                   )
                 ],
               ),

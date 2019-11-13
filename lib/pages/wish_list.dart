@@ -125,7 +125,7 @@ class _WishListState extends State<WishList> {
   Widget songcard(String song , String artists ,String url,String urllink ){
     return GestureDetector(
       onTap: (){
-        Navigator.push(context,MaterialPageRoute(builder: (context) => SongPage(song,url,urllink)),);
+        Navigator.push(context,MaterialPageRoute(builder: (context) => SongPage(song,artists,password,url,urllink)),);
       },
       child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 8),
