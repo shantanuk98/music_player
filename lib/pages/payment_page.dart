@@ -21,7 +21,85 @@ class _PaymentPageState extends State<PaymentPage> {
         appBar: AppBar(
           title: Text("Checkout"),
         ),
-        body: Container(
+        body: 
+        
+        Container(
+          color: Color.fromRGBO(150, 66, 86, 1.0),
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Card(
+                  color: Color.fromRGBO(200, 75, 96, .9),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                    child: Container(
+                    decoration: BoxDecoration(color: Color.fromRGBO(200, 75, 96, .9),borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                    height: MediaQuery.of(context).size.height*0.4,
+                    width: MediaQuery.of(context).size.width,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: url!=null?Image.network(url):Image.network("https://via.placeholder.com/150"),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height*0.01,
+                    width: MediaQuery.of(context).size.width,
+              ),
+              Container(
+                child: Column(
+                  children: <Widget>[
+                    Text(song,style: TextStyle(color: Colors.white)),
+                    Text(artists,style: TextStyle(color: Colors.white70))
+                  ],
+                ),
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height*0.01,
+                    width: MediaQuery.of(context).size.width,
+              ),
+              Container(
+                child: Row(
+                  children: <Widget>[
+                    Expanded(child: Center(child: Text("Amount Payable :",style: TextStyle(color: Colors.white)))),
+                    Expanded(child: Center(child: Text("\$${song.length}",style: TextStyle(color: Colors.white))))
+                  ],
+                ),
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height*0.02,
+                    width: MediaQuery.of(context).size.width,
+              ),
+              Container(
+                child: HomePage(),
+              )
+            ],
+          ),
+        ),
+      ));
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        /*
+        
+        Container(
           child: Column(
             children: <Widget>[
               Container(
@@ -65,6 +143,6 @@ class _PaymentPageState extends State<PaymentPage> {
         ),
        ),
       
-    );
+    );*/
   }
 }

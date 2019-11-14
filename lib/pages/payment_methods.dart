@@ -41,13 +41,54 @@ class _HomePageState extends State<HomePage> {
             child: Container(
               alignment: Alignment.center,
               child: RaisedButton(
-                  child: Text('PhonePe'),
+                elevation: 0,
+                  color: Color.fromRGBO(150, 66, 86, 1.0),
+                  child: Container(
+                    height: MediaQuery.of(context).size.height*0.06,
+                    width: MediaQuery.of(context).size.width*0.3,
+                    child: Image.asset("assets/images/PhonePay.png",fit: BoxFit.fill,)
+                    ),
                   onPressed: () {
                     _transaction = initiateTransaction(UpiIndiaApps.PhonePe);
                     setState(() {});
                   }),
             ),
           ),
+          Container(
+            child: Container(
+              alignment: Alignment.center,
+              child: RaisedButton(
+                elevation: 0,
+                  color: Color.fromRGBO(150, 66, 86, 1.0),
+                  child: Container(
+                    height: MediaQuery.of(context).size.height*0.06,
+                    width: MediaQuery.of(context).size.width*0.3,
+                    child: Image.asset("assets/images/GooglePay.png",fit: BoxFit.fill,)
+                    ),
+                  onPressed: () {
+                    _transaction = initiateTransaction(UpiIndiaApps.GooglePay);
+                    setState(() {});
+                  }),
+            ),
+          ),
+          Container(
+            child: Container(
+              alignment: Alignment.center,
+              child: RaisedButton(
+                elevation: 0,
+                  color: Color.fromRGBO(150, 66, 86, 1.0),
+                  child: Container(
+                    height: MediaQuery.of(context).size.height*0.06,
+                    width: MediaQuery.of(context).size.width*0.3,
+                    child: Image.asset("assets/images/PaytmButton.jpeg",fit: BoxFit.fill,)
+                    ),
+                  onPressed: () {
+                    _transaction = initiateTransaction(UpiIndiaApps.PayTM);
+                    setState(() {});
+                  }),
+            ),
+          ),
+/*
           Container(
             child: FutureBuilder(
               future: _transaction,
@@ -99,7 +140,7 @@ class _HomePageState extends State<HomePage> {
                 }
               },
             ),
-          )
+          )*/
         ],
     );
   }
